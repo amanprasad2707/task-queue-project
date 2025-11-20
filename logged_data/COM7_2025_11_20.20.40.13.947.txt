@@ -1,0 +1,109 @@
+
+========================================
+               MAIN MENU                
+========================================
+  [0]  LED Effects
+  [1]  Date & Time Settings
+  [2]  Exit
+----------------------------------------
+  Enter your choice: task 5: task 5: task 5: task 5: 
+========================================
+               MAIN MENU                
+========================================
+  [0]  LED Effects
+  [1]  Date & Time Settings
+  [2]  Exit
+----------------------------------------
+  Enter your choice: 
+========================================
+              LED EFFECTS               
+========================================
+ Available Effects:
+   [none] STOP
+   [e1] Effect 1
+   [e2] Effect 2
+   [e3] Effect 3
+   [e4] Effect 4
+----------------------------------------
+ Select an effect: 
+========================================
+               MAIN MENU                
+========================================
+  [0]  LED Effects
+  [1]  Date & Time Settings
+  [2]  Exit
+----------------------------------------
+  Enter your choice: 
+========================================
+              LED EFFECTS               
+========================================
+ Available Effects:
+   [none] STOP
+   [e1] Effect 1
+   [e2] Effect 2
+   [e3] Effect 3
+   [e4] Effect 4
+----------------------------------------
+ Select an effect: 
+========================================
+               MAIN MENU                
+========================================
+  [0]  LED Effects
+  [1]  Date & Time Settings
+  [2]  Exit
+----------------------------------------
+  Enter your choice: 
+========================================
+               RTC                      
+========================================
+
+Current Time&Date:	01:00:31 [AM]	01-01-2000
+  [0]  Configure Time
+  [1]  Configure Date
+  [2]  Enable Reporting
+  [3]  Exit
+----------------------------------------
+  Enter your choice: Enter hour(1-12):Enter minutes(0-59):Enter seconds(0-59):Configuration successful
+
+Current Time&Date:	08:42:21 [AM]	01-01-2000
+
+[ERROR] Invalid command received.
+
+========================================
+               MAIN MENU                
+========================================
+  [0]  LED Effects
+  [1]  Date & Time Settings
+  [2]  Exit
+----------------------------------------
+  Enter your choice: 
+========================================
+               RTC                      
+========================================
+
+Current Time&Date:	08:42:52 [AM]	01-01-2000
+  [0]  Configure Time
+  [1]  Configure Date
+  [2]  Enable Reporting
+  [3]  Exit
+----------------------------------------
+  Enter your choice: Enable time & date reporting(y/n)?: 
+========================================
+               MAIN MENU                
+========================================
+  [0]  LED Effects
+  [1]  Date & Time Settings
+  [2]  Exit
+----------------------------------------
+  Enter your choice: 
+========================================
+              LED EFFECTS               
+========================================
+ Available Effects:
+   [none] STOP
+   [e1] Effect 1
+   [e2] Effect 2
+   [e3] Effect 3
+   [e4] Effect 4
+----------------------------------------
+ Select an effect: 

@@ -1,0 +1,58 @@
+
+========================================
+               MAIN MENU                
+========================================
+  [0]  LED Effects
+  [1]  Date & Time Settings
+  [2]  Exit
+----------------------------------------
+  Enter your choice: task 5: 
+========================================
+              LED EFFECTS               
+========================================
+ Available Effects:
+   [0] None
+   [1] Effect 1
+   [2] Effect 2
+   [3] Effect 3
+   [4] Effect 4
+----------------------------------------
+ Select an effect: task 5: task 5: 
+========================================
+               MAIN MENU                
+========================================
+  [0]  LED Effects
+  [1]  Date & Time Settings
+  [2]  Exit
+----------------------------------------
+  Enter your choice: 
+========================================
+              LED EFFECTS               
+========================================
+ Available Effects:
+   [0] None
+   [1] Effect 1
+   [2] Effect 2
+   [3] Effect 3
+   [4] Effect 4
+----------------------------------------
+ Select an effect: task 5: 
+========================================
+               MAIN MENU                
+========================================
+  [0]  LED Effects
+  [1]  Date & Time Settings
+  [2]  Exit
+----------------------------------------
+  Enter your choice: 
+========================================
+              LED EFFECTS               
+========================================
+ Available Effects:
+   [0] None
+   [1] Effect 1
+   [2] Effect 2
+   [3] Effect 3
+   [4] Effect 4
+----------------------------------------
+ Select an effect: task 5: task 5: 
