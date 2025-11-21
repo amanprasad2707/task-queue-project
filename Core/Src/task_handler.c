@@ -151,9 +151,6 @@ const char *msg_led =
     xreturned = xTaskNotifyWait(0, 0, &cmd_addr, portMAX_DELAY);
     configASSERT(xreturned == pdTRUE);
 
-    // todo: doubt may i have to write xreturned = xQueueSend(q_print, &msg_led,
-    // portMAX_DELAY); configASSERT(xreturned == pdTRUE); because when i select
-    // led effect after that it doesn't show anything
 
     cmd = (command_t *)cmd_addr;
 
@@ -215,40 +212,6 @@ const char *msg_led =
     // notify menu task
     xTaskNotify(handle_task_menu, 0, eNoAction);
 
-    /* if(cmd->len <= 4){
-      option = cmd->payload[0] - 48;
-      switch (option){
-      case 0:
-        led_effect_stop();
-        break;
-      case 1:
-        led_effect1();
-        break;
-      case 2:
-        led_effect2();
-        break;
-      case 3:
-        led_effect3();
-        break;
-      case 4:
-        led_effect4();
-        break;
-      default:
-      // print invalid message
-      xreturned = xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
-      configASSERT(xreturned == pdTRUE);
-      curr_screen_state = sMainMenu;
-      continue;
-      }
-    } else {
-      // print invalid message for command length > 1
-      xreturned = xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
-      configASSERT(xreturned == pdTRUE);
-      // Go back to main menu
-      curr_screen_state = sMainMenu;
-      xTaskNotify(handle_task_menu, 0, eNoAction);
-      continue;
-    } */
   }
 }
 
