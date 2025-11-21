@@ -144,6 +144,7 @@ int main(void)
   // create software timers for led effects
   for (int i = 0; i < 10; i++){
     timer_led[i] = xTimerCreate("LED timer", pdMS_TO_TICKS(500), pdTRUE, (void*) (i+1), led_effect_callback);
+  }
   
   if(HAL_UART_Receive_IT(&huart2, (uint8_t*) &user_data, 1) != HAL_OK){
     Error_Handler();

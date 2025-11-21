@@ -232,6 +232,7 @@ void rtc_task(void *param) {
   const char *msg_rtc_hh = "Enter hour(1-12):";
   const char *msg_rtc_mm = "Enter minutes(0-59):";
   const char *msg_rtc_ss = "Enter seconds(0-59):";
+  const char *msg_rtc_am_pm = "Enter AM/PM:";
 
   const char *msg_rtc_dd = "Enter date(1-31):";
   const char *msg_rtc_mo = "Enter month(1-12):";
@@ -250,14 +251,15 @@ void rtc_task(void *param) {
   RTC_TimeTypeDef time;
   RTC_DateTypeDef date;
 
-#define HH_CONFIG 0
-#define MM_CONFIG 1
-#define SS_CONFIG 2
+#define HH_CONFIG      0
+#define MM_CONFIG      1
+#define SS_CONFIG      2
+#define AM_PM_CONFIG   3
 
-#define DATE_CONFIG 0
-#define MONTH_CONFIG 1
-#define YEAR_CONFIG 2
-#define DAY_CONFIG 3
+#define DATE_CONFIG    0
+#define MONTH_CONFIG   1
+#define YEAR_CONFIG    2
+#define DAY_CONFIG     3
 
   while (1) {
     // wait till someone notifies
@@ -312,9 +314,9 @@ void rtc_task(void *param) {
         }
 
         case sRtcTimeConfig: {
-          /*get hh, mm, ss info. and configure RTC */
-          /*take care of invalid entries */
+          
           switch (rtc_state) {
+            
           case HH_CONFIG:{
             uint8_t hour = get_number(cmd->payload, cmd->len);
             time.Hours = hour;
@@ -334,16 +336,36 @@ void rtc_task(void *param) {
           case SS_CONFIG:{
             uint8_t second = get_number(cmd->payload, cmd->len);
             time.Seconds = second;
+            rtc_state = AM_PM_CONFIG;
+            xQueueSend(q_print, &msg_rtc_am_pm, portMAX_DELAY);
+            break;
+          }
+
+          case AM_PM_CONFIG:{
+            if(!strcmp((char *) cmd->payload, "AM")){
+              time.TimeFormat = RTC_HOURFORMAT12_AM;
+            }
+            else if(!strcmp((char *) cmd->payload, "PM")){
+              time.TimeFormat = RTC_HOURFORMAT12_PM;
+            }
+
+            else {
+              xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
+              curr_screen_state = sMainMenu;
+              rtc_state = 0;
+              break;
+            }
+
             if (!validate_rtc_info(&time, NULL)) {
               config_rtc_time(&time);
               xQueueSend(q_print, &msg_conf, portMAX_DELAY);
               show_time_date();
             } else {
               xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
-              curr_screen_state = sMainMenu;
+            }
+            curr_screen_state = sMainMenu;
               rtc_state = 0;
               break;
-            }
           }
         }
         break;

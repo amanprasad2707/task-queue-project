@@ -43,7 +43,7 @@ void show_time_date(void){
 	xQueueSend(q_print,&time,portMAX_DELAY);
 
 	/* Display date Format : date-month-year */
-	sprintf((char*)show_date,"\t%02d-%02d-%2d\n",RTC_date.Month, RTC_date.Date, 2000 + RTC_date.Year);
+	sprintf((char*)show_date,"\t%02d-%02d-%2d\n",RTC_date.Date, RTC_date.Month, 2000 + RTC_date.Year);
 	xQueueSend(q_print,&date,portMAX_DELAY);
 }
 
