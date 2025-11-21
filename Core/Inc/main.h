@@ -39,6 +39,7 @@ extern "C" {
 #include "timers.h"
 #include "stdio.h"
 #include "stdint.h"
+#include <stdlib.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -56,7 +57,7 @@ extern QueueHandle_t q_print;
 
 extern UART_HandleTypeDef huart2;
 
-extern TimerHandle_t timer_led[4];
+extern TimerHandle_t timer_led[10];
 extern TimerHandle_t timer_rtc;
 
 extern RTC_HandleTypeDef hrtc;
@@ -102,10 +103,16 @@ void led_task(void * param);
 void rtc_task(void * param);
 
 void led_effect_stop(void);
-void led_effect1(void);
-void led_effect2(void);
-void led_effect3(void);
-void led_effect4(void);
+void all_blink(void);
+void ping_pong_sweep(void);
+void shift_left(void);
+void shift_right(void);
+void edge_to_center(void);
+void binary_counter(void);
+void random_sparkle(void);
+void wave_expand(void);
+void alternate_flash(void);
+void growing_bar(void);
 void led_effect(int n);
 
 /* USER CODE END EFP */

@@ -47,24 +47,23 @@ void menu_task(void *param) {
                                 // convert it from ASCII to a real integer (0–9)
 
       switch (option) {
-      case 0:
-        curr_screen_state = sLedEffect;
-        xTaskNotify(handle_task_led, 0, eNoAction);
-        break;
-      case 1:
-        curr_screen_state = sRtcMenu;
-        // xTaskNotify(handle_task_rtc, 0, eNoAction);
-        break;
-      case 2:
-        break; // implement exit
-      default:
-        xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
-        continue;
+        case 0:
+          curr_screen_state = sLedEffect;
+          xTaskNotify(handle_task_led, 0, eNoAction);
+          break;
+        case 1:
+          curr_screen_state = sRtcMenu;
+          xTaskNotify(handle_task_rtc, 0, eNoAction);
+          break;
+        case 2:
+          break; // implement exit
+        default:
+          xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
+          continue;
       }
 
-      // wait to run again when some other task notifies
-      xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
-    } else { // invalid entry
+    } 
+    else { // invalid entry
       xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
       continue;
     }
@@ -85,8 +84,7 @@ void print_task(void *param) {
     configASSERT(xreturned == pdTRUE);
 
     xSemaphoreTake(uart_mutex, portMAX_DELAY);
-    hal_status = HAL_UART_Transmit(&huart2, (uint8_t *)msg_print,
-                                   strlen(msg_print), HAL_MAX_DELAY);
+    hal_status = HAL_UART_Transmit(&huart2, (uint8_t *)msg_print,strlen(msg_print), HAL_MAX_DELAY);
     if (hal_status != HAL_OK) {
       Error_Handler();
     }
@@ -118,18 +116,28 @@ void led_task(void *param) {
   command_t *cmd;
   // int option;
 
-  const char *msg_led = "\n"
-                        "========================================\n"
-                        "              LED EFFECTS               \n"
-                        "========================================\n"
-                        " Available Effects:\n"
-                        "   [none] STOP\n"
-                        "   [e1] Effect 1\n"
-                        "   [e2] Effect 2\n"
-                        "   [e3] Effect 3\n"
-                        "   [e4] Effect 4\n"
-                        "----------------------------------------\n"
-                        " Select an effect: ";
+const char *msg_led =
+"\n"
+"========================================\n"
+"               LED EFFECTS              \n"
+"========================================\n"
+" Available Effects:\n"
+"   [none]  Stop All Effects\n"
+"\n"
+"   [e1]    All Blink\n"
+"   [e2]    Ping-Pong Sweep\n"
+"   [e3]    Shift Left\n"
+"   [e4]    Shift Right\n"
+"   [e5]    Edge-to-Center Wave\n"
+"   [e6]    Binary Counter\n"
+"   [e7]    Random Sparkle\n"
+"   [e8]    Wave Expand\n"
+"   [e9]    Alternate Flash\n"
+"   [e10]   Growing Bar\n"
+"\n"
+"----------------------------------------\n"
+" Select an effect: ";
+
 
   while (1) {
     // Wait for notification from the menu task to become active
@@ -152,15 +160,49 @@ void led_task(void *param) {
     if (cmd->len <= 4) {
       if (!strcmp((char *)cmd->payload, "none")) {
         led_effect_stop();
-      } else if (!strcmp((char *)cmd->payload, "e1")) {
+      }
+
+      else if (!strcmp((char *)cmd->payload, "e1")) {
         led_effect(1);
-      } else if (!strcmp((char *)cmd->payload, "e2")) {
+      }
+      
+      else if (!strcmp((char *)cmd->payload, "e2")) {
         led_effect(2);
-      } else if (!strcmp((char *)cmd->payload, "e3")) {
+      }
+      
+      else if (!strcmp((char *)cmd->payload, "e3")) {
         led_effect(3);
-      } else if (!strcmp((char *)cmd->payload, "e4")) {
+      }
+      
+      else if (!strcmp((char *)cmd->payload, "e4")) {
         led_effect(4);
-      } else {
+      }
+      
+      else if (!strcmp((char *)cmd->payload, "e5")) {
+        led_effect(5);
+      }
+
+      else if (!strcmp((char *)cmd->payload, "e6")) {
+        led_effect(6);
+      }
+
+      else if (!strcmp((char *)cmd->payload, "e7")) {
+        led_effect(7);
+      }
+
+      else if (!strcmp((char *)cmd->payload, "e8")) {
+        led_effect(8);
+      }
+
+      else if (!strcmp((char *)cmd->payload, "e9")) {
+        led_effect(9);
+      }
+
+      else if (!strcmp((char *)cmd->payload, "e10")) {
+        led_effect(10);
+      }
+
+      else {
         xQueueSend(q_print, &msg_invalid,
                    portMAX_DELAY); // print invalid message
       }

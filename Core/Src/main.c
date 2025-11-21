@@ -59,7 +59,7 @@ QueueHandle_t q_data;
 QueueHandle_t q_print;
 
 // software timer handles
-TimerHandle_t timer_led[4];
+TimerHandle_t timer_led[10];
 TimerHandle_t timer_rtc;
 
 volatile uint8_t user_data;
@@ -142,9 +142,8 @@ int main(void)
   configASSERT(q_print != NULL);
 
   // create software timers for led effects
-  for (int i = 0; i < 4; i++){
-    timer_led[i] = xTimerCreate("LED timer", pdMS_TO_TICKS(200), pdTRUE, (void*) (i+1), led_effect_callback);
-  }
+  for (int i = 0; i < 10; i++){
+    timer_led[i] = xTimerCreate("LED timer", pdMS_TO_TICKS(500), pdTRUE, (void*) (i+1), led_effect_callback);
   
   if(HAL_UART_Receive_IT(&huart2, (uint8_t*) &user_data, 1) != HAL_OK){
     Error_Handler();
@@ -349,20 +348,45 @@ void led_effect_callback(TimerHandle_t xTimer){
   switch (id)
   {
   case 1:
-    led_effect1();
+    all_blink();
     break;
   
   case 2:
-    led_effect2();
+    ping_pong_sweep();
     break;
 
   case 3:
-    led_effect3();
+    shift_left();
     break;
   
   case 4:
-    led_effect4();
+    shift_right();
     break;
+    
+  case 5:
+    edge_to_center();
+    break;
+
+  case 6:
+    binary_counter();
+    break;
+
+  case 7:
+    random_sparkle();
+    break;
+
+  case 8:
+    wave_expand();
+    break;
+
+  case 9:
+    alternate_flash();
+    break;
+
+  case 10:
+    growing_bar();
+    break;
+
   default:
     break;
   }
