@@ -42,9 +42,7 @@ void menu_task(void *param) {
     cmd = (command_t *)cmd_addr;
 
     if (cmd->len == 1) {
-      option =
-          cmd->payload[0] - 48; // Take the first character the user typed and
-                                // convert it from ASCII to a real integer (0–9)
+      option = cmd->payload[0] - 48; // Take the first character the user typed and convert it from ASCII to a real integer (0–9)
 
       switch (option) {
         case 0:
@@ -200,8 +198,7 @@ const char *msg_led =
       }
 
       else {
-        xQueueSend(q_print, &msg_invalid,
-                   portMAX_DELAY); // print invalid message
+        xQueueSend(q_print, &msg_invalid, portMAX_DELAY); // print invalid message
       }
     } else {
       xQueueSend(q_print, &msg_invalid, portMAX_DELAY); // print invalid message
@@ -229,15 +226,15 @@ void rtc_task(void *param) {
                         "----------------------------------------\n"
                         "  Enter your choice: ";
 
-  const char *msg_rtc_hh = "Enter hour(1-12):";
-  const char *msg_rtc_mm = "Enter minutes(0-59):";
-  const char *msg_rtc_ss = "Enter seconds(0-59):";
+  const char *msg_rtc_hh = "Enter hour (1-12):";
+  const char *msg_rtc_mm = "Enter minutes (0-59):";
+  const char *msg_rtc_ss = "Enter seconds (0-59):";
   const char *msg_rtc_am_pm = "Enter AM/PM:";
 
-  const char *msg_rtc_dd = "Enter date(1-31):";
-  const char *msg_rtc_mo = "Enter month(1-12):";
-  const char *msg_rtc_dow = "Enter day(1-7 sun:1):";
-  const char *msg_rtc_yr = "Enter year(0-99):";
+  const char *msg_rtc_dd = "Enter date (1-31):";
+  const char *msg_rtc_mo = "Enter month (1-12):";
+  const char *msg_rtc_dow = "Enter day (1-7 sun:1):";
+  const char *msg_rtc_yr = "Enter year last two digits (0-99):";
 
   const char *msg_conf = "Configuration successful\n";
   const char *msg_rtc_report = "Enable time & date reporting(y/n)?: ";

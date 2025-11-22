@@ -135,7 +135,6 @@ int main(void)
   xReturned = xTaskCreate(rtc_task, "RTC",512, NULL, PRIO_TASK_MENU, &handle_task_rtc);
   configASSERT(xReturned == pdPASS);
 
-  // HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, GPIO_PIN_SET);
 
   q_data = xQueueCreate(100, sizeof(char));
   configASSERT(q_data != NULL);
@@ -431,13 +430,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
   }
 }
 
-/* void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-    if(huart->Instance != USART2) return;
 
-    HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-
-    HAL_UART_Receive_IT(&huart2, (uint8_t*)&user_data, 1);
-} */
 
 
 /* USER CODE END 4 */
