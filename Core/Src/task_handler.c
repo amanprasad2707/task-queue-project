@@ -274,6 +274,11 @@ void rtc_task(void *param) {
       cmd = (command_t *)cmd_addr;
 
       switch (curr_screen_state) {
+        case sMainMenu:
+          break;
+        case sLedEffect:
+          break;
+          
         case sRtcMenu: {
           // process RTC menu commands
           if (cmd->len == 1) {
