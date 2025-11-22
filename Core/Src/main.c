@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "projdefs.h"
+#include "stm32f4xx_hal_def.h"
 #include "stm32f4xx_hal_uart.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -75,6 +76,7 @@ static void MX_RTC_Init(void);
 
 void led_effect_callback(TimerHandle_t xTimer);
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
+void rtc_timer_callback(TimerHandle_t xTimer);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -146,6 +148,9 @@ int main(void)
     timer_led[i] = xTimerCreate("LED timer", pdMS_TO_TICKS(500), pdTRUE, (void*) (i+1), led_effect_callback);
   }
   
+  // create software timer for rtc reporting
+  timer_rtc = xTimerCreate("RTC timer", pdMS_TO_TICKS(1000), pdTRUE, NULL, rtc_timer_callback);
+
   if(HAL_UART_Receive_IT(&huart2, (uint8_t*) &user_data, 1) != HAL_OK){
     Error_Handler();
   }
@@ -391,6 +396,11 @@ void led_effect_callback(TimerHandle_t xTimer){
   default:
     break;
   }
+}
+
+void rtc_timer_callback(TimerHandle_t xTimer){
+  UNUSED(xTimer);
+	show_time_date_ITM();
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){

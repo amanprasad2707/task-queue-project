@@ -14,8 +14,8 @@ void show_time_date_ITM(void){
   char *format;
   format = (RTC_time.TimeFormat == RTC_HOURFORMAT12_AM) ? "AM" : "PM";
 
-  printf("%02d:%02d:%02d [%s]", RTC_time.Hours, RTC_time.Minutes, RTC_time.Seconds, format);
-  printf("\t%02d-%02d-%02d", RTC_date.Date, RTC_date.Month, 2000 + RTC_date.Year);
+  printf("%02d:%02d:%02d [%s]\t", RTC_time.Hours, RTC_time.Minutes, RTC_time.Seconds, format);
+  printf("\t%02d-%02d-%02d\n", RTC_date.Date, RTC_date.Month, 2000 + RTC_date.Year);
 }
 
 

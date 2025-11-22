@@ -424,11 +424,13 @@ void rtc_task(void *param) {
             if (cmd->payload[0] == 'y') {
               if (xTimerIsTimerActive(timer_rtc) == pdFALSE) {
                 xTimerStart(timer_rtc, portMAX_DELAY);
-              } else if (cmd->payload[0] == 'n') {
-                xTimerStop(timer_rtc, portMAX_DELAY);
-              } else {
-                xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
               }
+            } else if (cmd->payload[0] == 'n') {
+              if (xTimerIsTimerActive(timer_rtc) != pdFALSE) {
+                xTimerStop(timer_rtc, portMAX_DELAY);
+              }
+            } else {
+              xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
             }
           } else {
             xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
