@@ -49,7 +49,6 @@ void show_time_date(void){
 
 
 void config_rtc_time(RTC_TimeTypeDef *time){
-  // time->TimeFormat = RTC_HOURFORMAT12_AM;  // todo: take this from user
   time->DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   time->StoreOperation = RTC_STOREOPERATION_RESET;
 
