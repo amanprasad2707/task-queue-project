@@ -12,6 +12,11 @@ uint8_t get_number(uint8_t *p, int len);
 
 const char *msg_invalid = "\n[ERROR] Invalid command received.\n";
 
+const char *msg_exit =
+        "\nExiting...\n"
+        "----------------------------------------\n"
+        "    Bye! Press any key to continue...\n";
+
 void menu_task(void *param) {
   UNUSED(param);
   BaseType_t xreturned;
@@ -54,6 +59,7 @@ void menu_task(void *param) {
           xTaskNotify(handle_task_rtc, 0, eNoAction);
           break;
         case 2:
+        xQueueSend(q_print, &msg_exit, portMAX_DELAY);
           break; // implement exit
         default:
           xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
